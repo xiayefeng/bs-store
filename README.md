@@ -1,0 +1,34 @@
+#bs-store
+## install
+```
+npm i bs-store -S
+```
+## use example
+``` js
+import bsStore from 'bs-store'
+
+// 设置 sessionStorage
+bsStore.setSession(key: string, val: [number, string, object, bigint])
+
+// 获取 sessionStorage
+bsStore.getSession(key: string)
+
+// 设置 localStorage
+bsStore.setLocal(key: stirng, val: [number, string, object, bigint])
+
+// 获取 localStorage
+bsStore.getLocal(key: string)
+
+// 删除某个sessionStorage
+bsStore.removeSession(key: string)
+// 删除某个localStorage
+bsStore.removeLocal(key: string)
+
+// 删除所有 sessionStorage
+bsStore.removeAllSession()
+// 删除所有 localStorage
+bsStore.removeAllLocal()
+
+// 删除所有的 sessionStorage 和 localSorage
+bsStore.removeAllStorage()
+```
