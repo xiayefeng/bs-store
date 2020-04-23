@@ -102,7 +102,7 @@ export default class bsStore {
       val = JSON.stringify({ str: val, isString2Object: true })
     } else if (Number.isNaN(val)) {
       val = JSON.stringify({ num: null, isNaN2Object: true })
-    } else if (typeof val === 'bigint') {
+    } else if (typeof val === 'bigint') { // eslint-disable-line
       val = JSON.stringify({ num: String(val), isBigInt2Object: true })
     }
     if (lx === 1) {
@@ -162,7 +162,7 @@ export default class bsStore {
     let target = obj
     if (this.checkedType(target) === 'Object') {
       if (Reflect.has(target, 'isBigInt2Object')) {
-        target = BigInt(target.num)
+        target = BigInt(target.num) // eslint-disable-line
       }
     }
     return target
