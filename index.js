@@ -1,3 +1,3 @@
-import Store from './local_store.js'
+const Store = require('./local_store')
 let store = new Store()
-export default store
+module.exports = store

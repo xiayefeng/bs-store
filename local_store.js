@@ -1,4 +1,4 @@
-export default class bsStore {
+class bsStore {
   constructor () {
     Store.checkBrows()
   }
@@ -171,3 +171,4 @@ export default class bsStore {
     return Object.prototype.toString.call(target).slice(8, -1)
   }
 }
+module.exports = bsStore
