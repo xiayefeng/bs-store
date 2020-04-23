@@ -1,22 +1,24 @@
+'use strict';
+
 class bsStore {
   constructor () {
-    Store.checkBrows()
+    Store.checkBrows();
   }
   getSession (key) {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
     }
-    let val = this.getItem(key)
+    let val = this.getItem(key);
     if (val === null) {
-      console.log(`no exist such ${key} sessionStorage`)
+      console.log(`no exist such ${key} sessionStorage`);
       return null
     }
-    let parseVal
+    let parseVal;
     try {
-      parseVal = JSON.parse(val)
-      parseVal = this.checkStr(parseVal)
-      parseVal = this.checkNaN(parseVal)
-      parseVal = this.checkBigInt(parseVal)
+      parseVal = JSON.parse(val);
+      parseVal = this.checkStr(parseVal);
+      parseVal = this.checkNaN(parseVal);
+      parseVal = this.checkBigInt(parseVal);
     } catch (err) {
       if (err.message.includes('JSON')) {
         return val
@@ -29,17 +31,17 @@ class bsStore {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
     }
-    let val = this.getItem(key, 2)
+    let val = this.getItem(key, 2);
     if (val === null) {
-      console.log(`no exist such ${key} 的localStorage`)
+      console.log(`no exist such ${key} 的localStorage`);
       return null
     }
-    let parseVal
+    let parseVal;
     try {
-      parseVal = JSON.parse(val)
-      parseVal = this.checkStr(parseVal)
-      parseVal = this.checkNaN(parseVal)
-      parseVal = this.checkBigInt(parseVal)
+      parseVal = JSON.parse(val);
+      parseVal = this.checkStr(parseVal);
+      parseVal = this.checkNaN(parseVal);
+      parseVal = this.checkBigInt(parseVal);
     } catch (err) {
       if (err.message.includes('JSON')) {
         return val
@@ -49,39 +51,39 @@ class bsStore {
   }
 
   setSession (key, val) {
-    this.setItem(key, val)
+    this.setItem(key, val);
   }
 
   setLocal (key, val) {
-    this.setItem(key, val, 2)
+    this.setItem(key, val, 2);
   }
 
   removeSession (key) {
-    this.removeItem(key)
+    this.removeItem(key);
   }
 
   removeLocal (key) {
-    this.removeItem(key, 2)
+    this.removeItem(key, 2);
   }
 
   removeAllSession () {
-    this.removeAll()
+    this.removeAll();
   }
 
   removeAllLocal () {
-    this.removeAll(2)
+    this.removeAll(2);
   }
 
   removeAllStorage () {
-    this.removeAll(3)
+    this.removeAll(3);
   }
 
   getItem (key, lx = 1) {
-    let val
+    let val;
     if (lx === 1) {
-      val = sessionStorage.getItem(key)
+      val = sessionStorage.getItem(key);
     } else if (lx === 2) {
-      val = localStorage.getItem(key)
+      val = localStorage.getItem(key);
     }
     return val
   }
@@ -97,19 +99,19 @@ class bsStore {
       throw new Error('value is not support symbol')
     }
     if (typeof val === 'object') {
-      val = JSON.stringify(val)
+      val = JSON.stringify(val);
     } else if (typeof val === 'string') {
-      val = JSON.stringify({ str: val, isString2Object: true })
+      val = JSON.stringify({ str: val, isString2Object: true });
     } else if (Number.isNaN(val)) {
-      val = JSON.stringify({ num: null, isNaN2Object: true })
+      val = JSON.stringify({ num: null, isNaN2Object: true });
       // eslint-disable-next-line to ignore
     } else if (typeof val === 'bigint') {
-      val = JSON.stringify({ num: String(val), isBigInt2Object: true })
+      val = JSON.stringify({ num: String(val), isBigInt2Object: true });
     }
     if (lx === 1) {
-      sessionStorage.setItem(key, val)
+      sessionStorage.setItem(key, val);
     } else {
-      localStorage.setItem(key, val)
+      localStorage.setItem(key, val);
     }
   }
 
@@ -118,20 +120,20 @@ class bsStore {
       throw new Error('Items key params must be string')
     }
     if (lx === 1 && sessionStorage.hasOwnProperty(key)) {
-      sessionStorage.removeItem(key)
+      sessionStorage.removeItem(key);
     } else if (lx === 2 && localStorage.hasOwnProperty(key)) {
-      localStorage.removeItem(key)
+      localStorage.removeItem(key);
     }
   }
 
   removeAll (lx = 1) {
     if (lx === 1) {
-      sessionStorage.clear()
+      sessionStorage.clear();
     } else if (lx === 2) {
-      localStorage.clear()
+      localStorage.clear();
     } else if (lx === 3) {
-      sessionStorage.clear()
-      localStorage.clear()
+      sessionStorage.clear();
+      localStorage.clear();
     } else {
       throw new Error('param error, param must be one of 1,2,3')
     }
@@ -142,29 +144,29 @@ class bsStore {
     }
   }
   checkStr (obj) {
-    let target = obj
+    let target = obj;
     if (this.checkedType(target) === 'Object') {
       if (target.hasOwnProperty('isString2Object') && target.isString2Object) {
-        target = target.str
+        target = target.str;
       }
     }
     return target
   }
   checkNaN (obj) {
-    let target = obj
+    let target = obj;
     if (this.checkedType(target) === 'Object') {
       if (Reflect.has(target, 'isNaN2Object')) {
-        target = NaN
+        target = NaN;
       }
     }
     return target
   }
   checkBigInt (obj) {
-    let target = obj
+    let target = obj;
     if (this.checkedType(target) === 'Object') {
       if (Reflect.has(target, 'isBigInt2Object')) {
         // eslint-disable-next-line to ignore
-        target = BigInt(target.num)
+        target = BigInt(target.num);
       }
     }
     return target
@@ -173,4 +175,9 @@ class bsStore {
     return Object.prototype.toString.call(target).slice(8, -1)
   }
 }
-module.exports = bsStore
+var local_store = bsStore;
+
+let store = new local_store();
+var bsStore$1 = store;
+
+module.exports = bsStore$1;
