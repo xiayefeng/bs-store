@@ -1,6 +1,6 @@
 class bsStore {
   constructor () {
-    Store.checkBrows()
+    // Store.checkBrows()
   }
   getSession (key) {
     if (typeof key !== 'string') {

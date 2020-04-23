@@ -2,7 +2,7 @@
 
 class bsStore {
   constructor () {
-    Store.checkBrows();
+    // Store.checkBrows()
   }
   getSession (key) {
     if (typeof key !== 'string') {
@@ -178,6 +178,6 @@ class bsStore {
 var local_store = bsStore;
 
 let store = new local_store();
-var bsStore$1 = store;
+var main = store;
 
-module.exports = bsStore$1;
+module.exports = main;
