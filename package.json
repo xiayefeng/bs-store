@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/xiayefeng/bs-store/issues"
   },
-  "homepage": "https://github.com/xiayefeng/bs-store#readme"
+  "homepage": "https://github.com/xiayefeng/bs-store#readme",
+  "dependencies": {
+    "rollup": "^2.7.2"
+  }
 }
