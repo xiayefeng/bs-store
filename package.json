@@ -1,0 +1,22 @@
+{
+  "name": "bs-store",
+  "version": "1.0.0",
+  "description": "browser storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiayefeng/bs-store.git"
+  },
+  "keywords": [
+    "storage"
+  ],
+  "author": "xiayefeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xiayefeng/bs-store/issues"
+  },
+  "homepage": "https://github.com/xiayefeng/bs-store#readme"
+}
