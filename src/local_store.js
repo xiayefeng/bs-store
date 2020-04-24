@@ -102,7 +102,6 @@ class bsStore {
       val = JSON.stringify({ str: val, isString2Object: true })
     } else if (Number.isNaN(val)) {
       val = JSON.stringify({ num: null, isNaN2Object: true })
-      // eslint-disable-next-line to ignore
     } else if (typeof val === 'bigint') {
       val = JSON.stringify({ num: String(val), isBigInt2Object: true })
     }
@@ -117,9 +116,9 @@ class bsStore {
     if (typeof key !== 'string') {
       throw new Error('Items key params must be string')
     }
-    if (lx === 1 && sessionStorage.hasOwnProperty(key)) {
+    if (lx === 1 && sessionStorage.getItem(key) != null) {
       sessionStorage.removeItem(key)
-    } else if (lx === 2 && localStorage.hasOwnProperty(key)) {
+    } else if (lx === 2 && localStorage.getItem(key) != null) {
       localStorage.removeItem(key)
     }
   }
@@ -144,7 +143,7 @@ class bsStore {
   checkStr (obj) {
     let target = obj
     if (this.checkedType(target) === 'Object') {
-      if (target.hasOwnProperty('isString2Object') && target.isString2Object) {
+      if (Reflect.has(target, 'isString2Object') && target.isString2Object) {
         target = target.str
       }
     }
@@ -163,7 +162,7 @@ class bsStore {
     let target = obj
     if (this.checkedType(target) === 'Object') {
       if (Reflect.has(target, 'isBigInt2Object')) {
-        // eslint-disable-next-line to ignore
+        // eslint-disable-next-line
         target = BigInt(target.num)
       }
     }
