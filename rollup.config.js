@@ -8,8 +8,8 @@ import {uglify} from 'rollup-plugin-uglify';
 export default {
   input: 'src/main.js',
   output: {
-    file: 'bundle.js',
-    format: 'cjs'
+    format: 'cjs',
+    dir: './dist'
   },
   plugins: [
     resolve(),
