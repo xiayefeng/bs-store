@@ -1,7 +1,4 @@
-class bsStore {
-  constructor () {
-    // Store.checkBrows()
-  }
+export default class bsStore {
   getSession (key) {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
@@ -172,4 +169,3 @@ class bsStore {
     return Object.prototype.toString.call(target).slice(8, -1)
   }
 }
-module.exports = bsStore

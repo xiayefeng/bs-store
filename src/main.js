@@ -1,3 +1,3 @@
-const Store = require('./local_store')
-let store = new Store()
-module.exports = store
+import Store from './local_store'
+const bsStore = new Store()
+export default bsStore
