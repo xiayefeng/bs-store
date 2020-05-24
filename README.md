@@ -31,4 +31,10 @@ bsStore.removeAllLocal()
 
 // 删除所有的 sessionStorage 和 localSorage
 bsStore.removeAllStorage()
+
+// 获取sessionStorage 已存数据大小
+bsStore.getSessionSize()
+
+// 获取localStorage 已存数据大小
+bsStore.getLocalSize()
 ```
