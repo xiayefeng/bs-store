@@ -1,14 +1,15 @@
+type myType = string | number | boolean | object | bigint | Array<any> | null;
 export default class bsStore {
-  getSession (key) {
+  getSession (key:string): myType|never {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
     }
-    let val = this.getItem(key)
+    let val:any = this.getItem(key)
     if (val === null) {
       console.log(`no exist such ${key} sessionStorage`)
       return null
     }
-    let parseVal
+    let parseVal: myType = null
     try {
       parseVal = JSON.parse(val)
       parseVal = this.checkStr(parseVal)
@@ -22,16 +23,16 @@ export default class bsStore {
     return parseVal
   }
 
-  getLocal (key) {
+  getLocal (key: string): myType|never {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
     }
-    let val = this.getItem(key, 2)
+    let val: any = this.getItem(key, 2)
     if (val === null) {
       console.log(`no exist such ${key} 的localStorage`)
       return null
     }
-    let parseVal
+    let parseVal: myType = null
     try {
       parseVal = JSON.parse(val)
       parseVal = this.checkStr(parseVal)
@@ -45,36 +46,36 @@ export default class bsStore {
     return parseVal
   }
 
-  setSession (key, val) {
+  setSession (key: string, val: myType):void{
     this.setItem(key, val)
   }
 
-  setLocal (key, val) {
+  setLocal (key:string, val: myType):void {
     this.setItem(key, val, 2)
   }
 
-  removeSession (key) {
+  removeSession (key:string):void {
     this.removeItem(key)
   }
 
-  removeLocal (key) {
+  removeLocal (key:string):void {
     this.removeItem(key, 2)
   }
 
-  removeAllSession () {
+  removeAllSession (): void {
     this.removeAll()
   }
 
-  removeAllLocal () {
+  removeAllLocal ():void {
     this.removeAll(2)
   }
 
-  removeAllStorage () {
+  removeAllStorage ():void {
     this.removeAll(3)
   }
 
-  getItem (key, lx = 1) {
-    let val
+  getItem (key:string, lx:number = 1): myType {
+    let val: myType = null
     if (lx === 1) {
       val = sessionStorage.getItem(key)
     } else if (lx === 2) {
@@ -83,7 +84,7 @@ export default class bsStore {
     return val
   }
 
-  setItem (key, val, lx = 1) {
+  setItem (key:string, val: myType, lx:number = 1):void {
     if (typeof key !== 'string') {
       throw new Error('Items key params must be string')
     }
@@ -103,13 +104,13 @@ export default class bsStore {
       val = JSON.stringify({ num: String(val), isBigInt2Object: true })
     }
     if (lx === 1) {
-      sessionStorage.setItem(key, val)
+      sessionStorage.setItem(key, val as string)
     } else {
-      localStorage.setItem(key, val)
+      localStorage.setItem(key, val as string)
     }
   }
 
-  removeItem (key, lx = 1) {
+  removeItem (key: string, lx:number = 1):void {
     if (typeof key !== 'string') {
       throw new Error('Items key params must be string')
     }
@@ -120,7 +121,7 @@ export default class bsStore {
     }
   }
 
-  removeAll (lx = 1) {
+  removeAll (lx:number = 1) {
     if (lx === 1) {
       sessionStorage.clear()
     } else if (lx === 2) {
@@ -132,21 +133,16 @@ export default class bsStore {
       throw new Error('param error, param must be one of 1,2,3')
     }
   }
-  static checkBrows () {
-    if (!window.sessionStorage || !window.localStorage) {
-      throw new Error('当前环境不支持本地存储')
-    }
-  }
-  checkStr (obj) {
+  checkStr (obj: any): myType {
     let target = obj
     if (this.checkedType(target) === 'Object') {
-      if (Reflect.has(target, 'isString2Object') && target.isString2Object) {
+      if (Reflect.has(target as Object, 'isString2Object') && target!.isString2Object) {
         target = target.str
       }
     }
     return target
   }
-  checkNaN (obj) {
+  checkNaN (obj:any): myType {
     let target = obj
     if (this.checkedType(target) === 'Object') {
       if (Reflect.has(target, 'isNaN2Object')) {
@@ -155,7 +151,7 @@ export default class bsStore {
     }
     return target
   }
-  checkBigInt (obj) {
+  checkBigInt (obj: any): myType {
     let target = obj
     if (this.checkedType(target) === 'Object') {
       if (Reflect.has(target, 'isBigInt2Object')) {
@@ -165,25 +161,27 @@ export default class bsStore {
     }
     return target
   }
-  checkedType (target) {
+  checkedType (target: myType): string {
     return Object.prototype.toString.call(target).slice(8, -1)
   }
-  getSessionSize (){
-    const arr = Reflect.ownKeys(sessionStorage)
-    let num = 0
-    for(let item of arr){
-        num += sessionStorage.getItem(item).length
-    }
-    console.log(`sessionStorage used ${(num / 1024).toFixed(2)}kb`)
-    return num
+}
+
+export function getSessionSize (): number{
+  const arr: Array<string|number|symbol> = Reflect.ownKeys(sessionStorage)
+  let num = 0
+  for(let item of arr){
+      num += sessionStorage.getItem(item as string)!.length
   }
-  getLocalSize () {
-    const arr = Reflect.ownKeys(localStorage)
-    let num = 0
-    for (let item of arr) {
-      num += localStorage.getItem(item).length
-    }
-    console.log(`localStorage used ${(num / 1024).toFixed(2)}kb`)
-    return num
+  console.log(`sessionStorage used ${(num / 1024).toFixed(2)}kb`)
+  return num
+}
+
+export function getLocalSize (): number {
+  const arr: Array<string|number|symbol> = Reflect.ownKeys(localStorage)
+  let num = 0
+  for (let item of arr) {
+    num += localStorage.getItem(item as string)!.length
   }
+  console.log(`localStorage used ${(num / 1024).toFixed(2)}kb`)
+  return num
 }
