@@ -7,14 +7,14 @@
     "lib": [
       "dom",
       "es5",
-      "es6"
+      "esnext"
     ],
     "target": "es5",
     "outDir": "dist",
     "sourceMap": true
   },
   "include": [
-    "src/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

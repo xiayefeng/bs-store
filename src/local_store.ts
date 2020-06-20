@@ -1,4 +1,18 @@
 type myType = string | number | boolean | object | bigint | Array<any> | null;
+
+interface strObject{
+  isString2Object: boolean,
+  str: string
+}
+interface nanObject{
+  isNaN2Object: boolean,
+  num: null
+}
+
+interface bigintObject{
+  isBigInt2Object: boolean,
+  num: string | number
+}
 export default class bsStore {
   getSession (key:string): myType|never {
     if (typeof key !== 'string') {
@@ -133,30 +147,30 @@ export default class bsStore {
       throw new Error('param error, param must be one of 1,2,3')
     }
   }
-  checkStr (obj: any): myType {
-    let target = obj
+  checkStr (obj: myType): myType {
+    let target:myType = obj
     if (this.checkedType(target) === 'Object') {
-      if (Reflect.has(target as Object, 'isString2Object') && target!.isString2Object) {
-        target = target.str
+      if (Reflect.has(target as strObject, 'isString2Object') && (target as strObject).isString2Object) {
+        target = (target as strObject).str
       }
     }
     return target
   }
-  checkNaN (obj:any): myType {
-    let target = obj
+  checkNaN (obj:myType): myType {
+    let target: myType = obj
     if (this.checkedType(target) === 'Object') {
-      if (Reflect.has(target, 'isNaN2Object')) {
+      if (Reflect.has(target as nanObject, 'isNaN2Object')) {
         target = NaN
       }
     }
     return target
   }
-  checkBigInt (obj: any): myType {
-    let target = obj
+  checkBigInt (obj: myType): myType {
+    let target: myType = obj
     if (this.checkedType(target) === 'Object') {
-      if (Reflect.has(target, 'isBigInt2Object')) {
+      if (Reflect.has(target as bigintObject, 'isBigInt2Object')) {
         // eslint-disable-next-line
-        target = BigInt(target.num)
+        target = BigInt((target as bigintObject).num)
       }
     }
     return target
