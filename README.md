@@ -1,11 +1,16 @@
-#bs-store
+
+# bs-store
+
 ## install
-```
+
+``` bash
 npm i bs-store -S
 ```
+
 ## use example
+
 ``` js
-import bsStore from 'bs-store'
+import bsStore, {getSessionSize, getLocalSize} from 'bs-store'
 
 // 设置 sessionStorage
 bsStore.setSession(key: string, val: number | boolean | string | object | bigint)
@@ -33,8 +38,8 @@ bsStore.removeAllLocal()
 bsStore.removeAllStorage()
 
 // 获取sessionStorage 已存数据大小
-bsStore.getSessionSize()
+getSessionSize()
 
 // 获取localStorage 已存数据大小
-bsStore.getLocalSize()
+getLocalSize()
 ```
