@@ -13,13 +13,13 @@ npm i bs-store -S
 import bsStore, {getSessionSize, getLocalSize} from 'bs-store'
 
 // 设置 sessionStorage
-bsStore.setSession(key: string, val: number | boolean | string | object | bigint)
+bsStore.setSession(key: string, val: number|boolean|string|object|[]<any>|bigint)
 
 // 获取 sessionStorage
 bsStore.getSession(key: string)
 
 // 设置 localStorage
-bsStore.setLocal(key: stirng, val: number | boolean | string | object |bigint)
+bsStore.setLocal(key: stirng, val: number|boolean|string|object|[]<any>|bigint)
 
 // 获取 localStorage
 bsStore.getLocal(key: string)
