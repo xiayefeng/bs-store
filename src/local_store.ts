@@ -18,6 +18,10 @@ interface bigintObject{
 }
 export default class BsStore {
   static compress = false
+  changePress(state: boolean){
+    BsStore.compress = state
+    return this
+  }
   getSession (key:string): myType|never {
     if (typeof key !== 'string') {
       throw new Error('params must be string')

@@ -12,7 +12,7 @@ npm i bs-store -S
 ``` js
 import bsStore, {getSessionSize, getLocalSize} from 'bs-store'
 
-bsStore.compress = true // 开启压缩模式，默认 false
+bsStore.changePress(true) // 开启压缩模式，默认 false
 
 // 设置 sessionStorage
 bsStore.setSession(key: string, val: number|boolean|string|object|[]<any>|bigint)
