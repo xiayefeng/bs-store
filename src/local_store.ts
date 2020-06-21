@@ -1,3 +1,6 @@
+
+import LZString from 'lz-string'
+
 type myType = string | number | boolean | object | bigint | Array<any> | null;
 
 interface strObject{
@@ -13,7 +16,8 @@ interface bigintObject{
   isBigInt2Object: boolean,
   num: string | number
 }
-export default class bsStore {
+export default class BsStore {
+  static compress = false
   getSession (key:string): myType|never {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
@@ -95,6 +99,10 @@ export default class bsStore {
     } else if (lx === 2) {
       val = localStorage.getItem(key)
     }
+    if(val === null) return val
+    if(BsStore.compress){
+      val = LZString.decompress(val)
+    }
     return val
   }
 
@@ -116,6 +124,9 @@ export default class bsStore {
       val = JSON.stringify({ num: null, isNaN2Object: true })
     } else if (typeof val === 'bigint') {
       val = JSON.stringify({ num: String(val), isBigInt2Object: true })
+    }
+    if(BsStore.compress){
+      val = LZString.compress(val)
     }
     if (lx === 1) {
       sessionStorage.setItem(key, val as string)

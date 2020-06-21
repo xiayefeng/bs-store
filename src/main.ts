@@ -1,5 +1,9 @@
 import Store,{getSessionSize, getLocalSize} from './local_store'
-const bsStore: Store = new Store()
+interface bsType extends Store{
+  compress?: boolean,
+}
+const bsStore: bsType = new Store()
+bsStore.compress = Store.compress
 export default bsStore
 export {
   getSessionSize,

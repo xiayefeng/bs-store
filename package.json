@@ -1,6 +1,6 @@
 {
   "name": "bs-store",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "browser storage",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,9 @@
     "url": "https://github.com/xiayefeng/bs-store/issues"
   },
   "homepage": "https://github.com/xiayefeng/bs-store#readme",
-  "dependencies": {},
+  "dependencies": {
+    "lz-string": "^1.4.4"
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",

@@ -4,6 +4,8 @@ import babel from 'rollup-plugin-babel';
 import {eslint} from 'rollup-plugin-eslint';
 import replace from 'rollup-plugin-replace';
 import {uglify} from 'rollup-plugin-uglify'; */
+import resolve from 'rollup-plugin-node-resolve'
+import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2'
 
@@ -18,7 +20,8 @@ export default {
     {
       format: 'iife',
       name: 'bsStore',
-      file: './dist/index.iife.js'
+      file: './dist/index.iife.js',
+      exports: 'named'
     },
     {
       format: 'esm',
@@ -41,6 +44,8 @@ export default {
       ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
     }),
     (process.env.NODE_ENV === 'production' && uglify()), */
+    resolve(),
+    commonjs(),
     typescript(),
     (process.env.NODE_ENV === 'production' && terser())
   ],
