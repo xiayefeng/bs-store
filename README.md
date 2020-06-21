@@ -12,7 +12,7 @@ npm i bs-store -S
 ``` js
 import bsStore, {getSessionSize, getLocalSize} from 'bs-store'
 
-bsStore.changePress(true) // 开启压缩模式，默认 false
+bsStore.pressState = true // 开启压缩模式，默认 false 只支持单一模式，设定后同一应用不可再次设定
 
 // 设置 sessionStorage
 bsStore.setSession(key: string, val: number|boolean|string|object|[]<any>|bigint)

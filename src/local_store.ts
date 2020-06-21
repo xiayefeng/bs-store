@@ -17,11 +17,19 @@ interface bigintObject{
   num: string | number
 }
 export default class BsStore {
-  static compress = false
-  changePress(state: boolean){
-    BsStore.compress = state
-    return this
+  private compress: boolean = false
+  
+  get pressState(): boolean{
+    return this.compress
   }
+  set pressState(state: boolean){
+     if(this.compress) {
+       console.warn('pressState on set once')
+       return
+     }
+     this.compress = state
+  }
+ 
   getSession (key:string): myType|never {
     if (typeof key !== 'string') {
       throw new Error('params must be string')
@@ -104,7 +112,7 @@ export default class BsStore {
       val = localStorage.getItem(key)
     }
     if(val === null) return val
-    if(BsStore.compress){
+    if(this.compress){
       val = LZString.decompress(val)
     }
     return val
@@ -129,7 +137,7 @@ export default class BsStore {
     } else if (typeof val === 'bigint') {
       val = JSON.stringify({ num: String(val), isBigInt2Object: true })
     }
-    if(BsStore.compress){
+    if(this.compress){
       val = LZString.compress(val)
     }
     if (lx === 1) {
