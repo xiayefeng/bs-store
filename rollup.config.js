@@ -20,12 +20,12 @@ export default {
     {
       format: 'iife',
       name: 'bsStore',
-      file: './dist/index.iife.js',
+      file: './lib/index.iife.js',
       exports: 'named'
     },
     {
       format: 'esm',
-      file: './dist/index.js'
+      file: './lib/index.js'
     }
   ],
   plugins: [
