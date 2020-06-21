@@ -138,7 +138,7 @@ export default class BsStore {
       val = JSON.stringify({ num: String(val), isBigInt2Object: true })
     }
     if(this.compress){
-      val = LZString.compress(val)
+      val = LZString.compress(String(val))
     }
     if (lx === 1) {
       sessionStorage.setItem(key, val as string)
