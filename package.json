@@ -1,15 +1,15 @@
 {
   "name": "bs-store",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "browser storage",
   "main": "index.js",
-  "types": "./src/types.d.ts",
+  "types": "./src/main.ts",
   "scripts": {
     "test": "jest",
     "dev": "rollup -c --environment NODE_ENV:development",
     "build": "rollup -c --environment NODE_ENV:production",
     "lint": "eslint 'src'",
-    "prepublish": "rm -rf dist && tsc && npm run build"
+    "prepublish": "rd /q/s dist lib && npm run build"
   },
   "repository": {
     "type": "git",
