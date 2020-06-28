@@ -3,11 +3,13 @@
   "version": "1.2.7",
   "description": "browser storage",
   "main": "index.js",
+  "types": "./src/types.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "rollup -c --environment NODE_ENV:development",
     "build": "rollup -c --environment NODE_ENV:production",
-    "lint": "eslint src/**"
+    "lint": "eslint 'src'",
+    "prepublish": "rm -rf dist && tsc && npm run build"
   },
   "repository": {
     "type": "git",
@@ -31,8 +33,11 @@
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
+    "@babel/preset-typescript": "^7.10.1",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.1.0",
     "eslint": "^6.8.0",
+    "jest": "^26.1.0",
     "lint-staged": "^10.1.7",
     "rollup": "^2.7.2",
     "rollup-plugin-babel": "^4.4.0",
