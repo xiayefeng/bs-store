@@ -39,18 +39,19 @@ export default class BsStore {
       console.log(`no exist such ${key} sessionStorage`)
       return null
     }
-    let parseVal: myType = null
+    return this.getValue(val)
+  }
+
+  getValue(val: string) : myType {
     try {
-      parseVal = JSON.parse(val)
+      let parseVal: any = JSON.parse(val)
       parseVal = this.checkStr(parseVal)
       parseVal = this.checkNaN(parseVal)
       parseVal = this.checkBigInt(parseVal)
-    } catch (err) {
-      if (err.message.includes('JSON')) {
-        return val
-      }
+      return parseVal
+    } catch(err) {
+       return val
     }
-    return parseVal
   }
 
   getLocal (key: string): myType|never {
@@ -62,18 +63,7 @@ export default class BsStore {
       console.log(`no exist such ${key} 的localStorage`)
       return null
     }
-    let parseVal: myType = null
-    try {
-      parseVal = JSON.parse(val)
-      parseVal = this.checkStr(parseVal)
-      parseVal = this.checkNaN(parseVal)
-      parseVal = this.checkBigInt(parseVal)
-    } catch (err) {
-      if (err.message.includes('JSON')) {
-        return val
-      }
-    }
-    return parseVal
+    return this.getValue(val)
   }
 
   setSession (key: string, val: myType):void{
