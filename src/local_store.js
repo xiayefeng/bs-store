@@ -14,7 +14,7 @@ var BsStore = /** @class */ (function () {
             }
             this.compress = state;
         },
-        enumerable: false,
+        enumerable: true,
         configurable: true
     });
     BsStore.prototype.getSession = function (key) {
@@ -26,19 +26,19 @@ var BsStore = /** @class */ (function () {
             console.log("no exist such " + key + " sessionStorage");
             return null;
         }
-        var parseVal = null;
+        return this.getValue(val);
+    };
+    BsStore.prototype.getValue = function (val) {
         try {
-            parseVal = JSON.parse(val);
+            var parseVal = JSON.parse(val);
             parseVal = this.checkStr(parseVal);
             parseVal = this.checkNaN(parseVal);
             parseVal = this.checkBigInt(parseVal);
+            return parseVal;
         }
         catch (err) {
-            if (err.message.includes('JSON')) {
-                return val;
-            }
+            return val;
         }
-        return parseVal;
     };
     BsStore.prototype.getLocal = function (key) {
         if (typeof key !== 'string') {
@@ -49,19 +49,7 @@ var BsStore = /** @class */ (function () {
             console.log("no exist such " + key + " \u7684localStorage");
             return null;
         }
-        var parseVal = null;
-        try {
-            parseVal = JSON.parse(val);
-            parseVal = this.checkStr(parseVal);
-            parseVal = this.checkNaN(parseVal);
-            parseVal = this.checkBigInt(parseVal);
-        }
-        catch (err) {
-            if (err.message.includes('JSON')) {
-                return val;
-            }
-        }
-        return parseVal;
+        return this.getValue(val);
     };
     BsStore.prototype.setSession = function (key, val) {
         this.setItem(key, val);
