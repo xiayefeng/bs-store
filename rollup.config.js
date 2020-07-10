@@ -14,13 +14,13 @@ export default {
   output: [
     {
       format: 'cjs',
-      file: './dist/main.js',
+      file: './lib/main.js',
       exports: 'named'
     },
     {
       format: 'iife',
       name: 'bsStore',
-      file: './lib/index.iife.js',
+      file: './dist/bs-store.min.js',
       exports: 'named'
     },
     {
