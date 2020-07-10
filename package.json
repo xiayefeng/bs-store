@@ -9,7 +9,7 @@
     "dev": "rollup -c --environment NODE_ENV:development",
     "build": "rollup -c --environment NODE_ENV:production",
     "lint": "eslint 'src'",
-    "prepublish": "rd /q/s dist lib && npm run build"
+    "prepublishOnly": "rd /q/s dist lib && npm run build"
   },
   "repository": {
     "type": "git",
@@ -58,6 +58,7 @@
       "git add"
     ]
   },
+  "os": ["darwin", "linux"],
   "gitHooks": {
     "pre-commit": "lint-staged"
   }
