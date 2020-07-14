@@ -58,7 +58,6 @@
       "git add"
     ]
   },
-  "os": ["darwin", "linux"],
   "gitHooks": {
     "pre-commit": "lint-staged"
   }
