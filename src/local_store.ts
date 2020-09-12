@@ -1,5 +1,6 @@
 
 import LZString from 'lz-string'
+import {version} from '/package.json'
 
 type myType = string | number | boolean | object | bigint | Array<any> | null;
 
@@ -29,6 +30,8 @@ export default class BsStore {
      }
      this.compress = state
   }
+
+  version = version
  
   getSession (key:string): myType|never {
     if (typeof key !== 'string') {
@@ -95,7 +98,7 @@ export default class BsStore {
   }
 
   getItem (key:string, lx:number = 1): myType {
-    let val: myType = null
+    let val = null
     if (lx === 1) {
       val = sessionStorage.getItem(key)
     } else if (lx === 2) {
