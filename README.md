@@ -11,8 +11,9 @@ npm i bs-store -S
 
 ``` js
 import bsStore, {getSessionSize, getLocalSize} from 'bs-store'
+import lzString from 'bs-store/lz-string'
 
-bsStore.pressState = true // 开启压缩模式，默认false设定后同一应用不可再次设定
+bsStore.use(lzString) // 开启压缩模式，后同一应用不可再次设定
 
 // 设置 sessionStorage
 bsStore.setSession(key: string, val: number|boolean|string|object|[]<any>|bigint)
