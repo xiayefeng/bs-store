@@ -9,45 +9,62 @@ import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2'
 
-export default {
-  input: 'src/main.ts',
-  output: [
-    {
-      format: 'cjs',
-      file: './lib/main.js',
-      exports: 'named'
-    },
-    {
-      format: 'iife',
-      name: 'bsStore',
-      file: './dist/bs-store.min.js',
-      exports: 'named'
-    },
-    {
-      format: 'esm',
-      file: './lib/index.js'
-    }
-  ],
-  plugins: [
-    /* resolve(),
-    commonjs(),
-    eslint({
-      exclude: [
-        'src/styles/**',
-      ]
-    }),
-    babel({
-      exclude: 'node_modules/**',
-    }),
-    replace({
-      exclude: 'node_modules/**',
-      ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-    }),
-    (process.env.NODE_ENV === 'production' && uglify()), */
-    resolve(),
-    commonjs(),
-    typescript(),
-    (process.env.NODE_ENV === 'production' && terser())
-  ],
-  external: []
-};
+export default [
+  {
+    input: 'src/main.ts',
+    output: [
+      {
+        format: 'cjs',
+        file: './lib/main.js',
+        exports: 'named'
+      },
+      {
+        format: 'iife',
+        name: 'bsStore',
+        file: './dist/bs-store.min.js',
+        exports: 'named'
+      },
+      {
+        format: 'esm',
+        file: './lib/index.js'
+      }
+    ],
+    plugins: [
+      /* resolve(),
+      commonjs(),
+      eslint({
+        exclude: [
+          'src/styles/**',
+        ]
+      }),
+      babel({
+        exclude: 'node_modules/**',
+      }),
+      replace({
+        exclude: 'node_modules/**',
+        ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      }),
+      (process.env.NODE_ENV === 'production' && uglify()), */
+      resolve(),
+      commonjs(),
+      typescript(),
+      (process.env.NODE_ENV === 'production' && terser())
+    ],
+    external: []
+  },
+  {
+    input: 'src/plugin.ts',
+    output: [
+      {
+        format: 'esm',
+        file: './lib/lz-string/index.js'
+      }
+    ],
+    plugins: [
+      resolve(),
+      commonjs(),
+      typescript(),
+      (process.env.NODE_ENV === 'production' && terser())
+    ]
+  }
+];
