@@ -1,6 +1,6 @@
 {
   "name": "bs-store",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "browser storage",
   "main": "index.js",
   "types": "./src/types.d.ts",

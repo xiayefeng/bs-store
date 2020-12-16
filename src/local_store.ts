@@ -8,6 +8,12 @@ interface strObject {
 	str: string
 }
 
+enum storeType {
+  session=1,
+  local,
+  all
+}
+
 interface lzString {
   decompress?: (val: string) => {}
   compress?: (val: string) => {}
@@ -66,7 +72,7 @@ export default class BsStore {
 		if (typeof key !== 'string') {
 			throw new Error('params must be string')
 		}
-		let val: any = this.getItem(key, 2)
+		let val: any = this.getItem(key, storeType.local)
 		if (val === null) {
 			console.log(`no exist such ${key} 的localStorage`)
 			return null
@@ -79,7 +85,7 @@ export default class BsStore {
 	}
 
 	setLocal(key: string, val: myType): void {
-		this.setItem(key, val, 2)
+		this.setItem(key, val, storeType.local)
 	}
 
 	removeSession(key: string): void {
@@ -87,7 +93,7 @@ export default class BsStore {
 	}
 
 	removeLocal(key: string): void {
-		this.removeItem(key, 2)
+		this.removeItem(key, storeType.local)
 	}
 
 	removeAllSession(): void {
@@ -95,18 +101,18 @@ export default class BsStore {
 	}
 
 	removeAllLocal(): void {
-		this.removeAll(2)
+		this.removeAll(storeType.local)
 	}
 
 	removeAllStorage(): void {
-		this.removeAll(3)
+		this.removeAll(storeType.all)
 	}
 
-	getItem(key: string, lx: number = 1): myType {
+	getItem(key: string, lx: storeType = storeType.session): myType {
 		let val = null
-		if (lx === 1) {
+		if (lx === storeType.session) {
 			val = sessionStorage.getItem(key)
-		} else if (lx === 2) {
+		} else if (lx === storeType.local) {
 			val = localStorage.getItem(key)
 		}
 		if (val === null) return val
@@ -116,7 +122,7 @@ export default class BsStore {
 		return val
 	}
 
-	setItem(key: string, val: myType, lx: number = 1): void {
+	setItem(key: string, val: myType, lx: storeType = storeType.session): void {
 		if (typeof key !== 'string') {
 			throw new Error('Items key params must be string')
 		}
@@ -138,30 +144,30 @@ export default class BsStore {
 		if (this.compress) {
 			val = this.compressPlugin.compress ? this.compressPlugin.compress(String(val)) : null
 		}
-		if (lx === 1) {
+		if (lx === storeType.session) {
 			sessionStorage.setItem(key, val as string)
 		} else {
 			localStorage.setItem(key, val as string)
 		}
 	}
 
-	removeItem(key: string, lx: number = 1): void {
+	removeItem(key: string, lx: storeType = storeType.session): void {
 		if (typeof key !== 'string') {
 			throw new Error('Items key params must be string')
 		}
-		if (lx === 1 && sessionStorage.getItem(key) != null) {
+		if (lx === storeType.session && sessionStorage.getItem(key) != null) {
 			sessionStorage.removeItem(key)
-		} else if (lx === 2 && localStorage.getItem(key) != null) {
+		} else if (lx === storeType.local && localStorage.getItem(key) != null) {
 			localStorage.removeItem(key)
 		}
 	}
 
-	removeAll(lx: number = 1) {
-		if (lx === 1) {
+	removeAll(lx: storeType = storeType.session) {
+		if (lx === storeType.session) {
 			sessionStorage.clear()
-		} else if (lx === 2) {
+		} else if (lx === storeType.local) {
 			localStorage.clear()
-		} else if (lx === 3) {
+		} else if (lx === storeType.all) {
 			sessionStorage.clear()
 			localStorage.clear()
 		} else {
