@@ -1,6 +1,6 @@
 {
   "name": "bs-store",
-  "version": "2.0.3",
+  "version": "2.0.5",
   "description": "browser storage",
   "main": "index.js",
   "types": "./src/types.d.ts",
@@ -9,7 +9,7 @@
     "dev": "rollup -c --environment NODE_ENV:development",
     "build": "rollup -c --environment NODE_ENV:production",
     "lint": "eslint 'src'",
-    "prepublishOnly": "rd /q/s dist lib && npm run build"
+    "prepublishOnly": "rd /q/s dist lib lz-string && npm run build"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-typescript": "^7.12.7",
     "@babel/types": "^7.12.11",
+    "@types/node": "^14.14.14",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
     "eslint": "^6.8.0",

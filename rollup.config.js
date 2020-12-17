@@ -55,13 +55,19 @@ export default [
 	{
 		input: 'src/plugin.ts',
 		output: [
-			{
+			/* {
 				format: 'esm',
 				file: './lib/lz-string/index.js',
-			},
+			}, */
 			{
 				format: 'cjs',
 				file: './lz-string/index.js',
+				exports: 'named',
+			},
+			{
+				format: 'iife',
+				name: 'lzString',
+				file: './dist/bs-store-lz-string.min.js',
 				exports: 'named',
 			},
 		],

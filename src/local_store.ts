@@ -32,7 +32,7 @@ interface bigintObject {
 }
 export default class BsStore {
 	private compress: boolean = false
-	version = '2.0.3'
+	version = '2.0.4'
 	compressPlugin: lzString = {}
 
 	use(obj: plugin) {
@@ -72,7 +72,9 @@ export default class BsStore {
 		}
 		let val: any = this.getItem(key, storeType.local)
 		if (val === null) {
-			console.log(`no exist such ${key} 的localStorage`)
+			if(process.env.NODE_ENV === 'development'){
+				console.warn(`no exist such ${key} 的localStorage`)
+			}
 			return null
 		}
 		return this.getValue(val)
@@ -214,7 +216,7 @@ export function getSessionSize(): number {
 	for (let item of arr) {
 		num += sessionStorage.getItem(item as string)!.length
 	}
-	console.log(`sessionStorage used ${(num / 1024).toFixed(2)}kb`)
+	// console.log(`sessionStorage used ${(num / 1024).toFixed(2)}kb`)
 	return num
 }
 
@@ -224,6 +226,6 @@ export function getLocalSize(): number {
 	for (let item of arr) {
 		num += localStorage.getItem(item as string)!.length
 	}
-	console.log(`localStorage used ${(num / 1024).toFixed(2)}kb`)
+	// console.log(`localStorage used ${(num / 1024).toFixed(2)}kb`)
 	return num
 }
