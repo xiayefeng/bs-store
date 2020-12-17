@@ -1,5 +1,3 @@
-import plugin from './plugin'
-import { version } from '/package.json'
 
 type myType = string | number | boolean | object | bigint | Array<any> | null
 
@@ -34,7 +32,7 @@ interface bigintObject {
 }
 export default class BsStore {
 	private compress: boolean = false
-	version = version
+	version = '2.0.3'
 	compressPlugin: lzString = {}
 
 	use(obj: plugin) {
