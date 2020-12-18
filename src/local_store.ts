@@ -117,7 +117,7 @@ export default class BsStore {
 		}
 		if (val === null) return val
 		if (this.compress) {
-			val = this.compressPlugin.decompress?this.compressPlugin.decompress(val):null
+			val = this.compressPlugin!.decompress!(val)
 		}
 		return val
 	}
@@ -142,7 +142,7 @@ export default class BsStore {
 			val = JSON.stringify({ num: String(val), isBigInt2Object: true })
 		}
 		if (this.compress) {
-			val = this.compressPlugin.compress ? this.compressPlugin.compress(String(val)) : null
+			val = this.compressPlugin!.compress!(String(val))
 		}
 		if (lx === storeType.session) {
 			sessionStorage.setItem(key, val as string)
