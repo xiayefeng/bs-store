@@ -1,6 +1,6 @@
 
 type myType = string | number | boolean | object | bigint | Array<any> | null
-
+import {version} from '../package.json'
 interface strObject {
 	isString2Object: boolean
 	str: string
@@ -32,7 +32,7 @@ interface bigintObject {
 }
 export default class BsStore {
 	private compress: boolean = false
-	version = '2.0.4'
+	version = version
 	compressPlugin: lzString = {}
 
 	use(obj: plugin) {
@@ -48,7 +48,9 @@ export default class BsStore {
 		}
 		let val: any = this.getItem(key)
 		if (val === null) {
-			console.log(`no exist such ${key} sessionStorage`)
+			if(process.env.NODE_ENV === 'development'){
+				console.warn(`no exist such ${key} sessionStorage`)
+			}
 			return null
 		}
 		return this.getValue(val)

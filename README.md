@@ -46,3 +46,26 @@ getSessionSize()
 // 获取localStorage 已存数据大小
 getLocalSize()
 ```
+
+## browser
+
+``` html
+<!-- 引入主包 -->
+ <script src="https://cdn.jsdelivr.net/npm/bs-store/dist/bs-store.min.js"></script>
+
+ <!-- 按需引入压缩插件 -->
+<script src="https://cdn.jsdelivr.net/npm/bs-store/dist/bs-store-lz-string.min.js"></script>
+
+<script>
+    var myStore = bsStore.default
+    myStore.setSession('key', 'abc')
+    myStore.getSession('key')  // 'abc'
+
+    myStore.setLocal('key', 123)
+    myStore.getLocal('key') // 123
+
+    // 使用压缩插件
+    myStore.use(lzString.default)
+</script>
+
+```
