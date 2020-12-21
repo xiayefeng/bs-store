@@ -2,12 +2,13 @@
 import commonjs from 'rollup-plugin-commonjs';
 import babel from 'rollup-plugin-babel';
 import {eslint} from 'rollup-plugin-eslint';
-import replace from 'rollup-plugin-replace';
-import {uglify} from 'rollup-plugin-uglify'; */
+import replace from 'rollup-plugin-replace'; */
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import { terser } from 'rollup-plugin-terser'
 import typescript from 'rollup-plugin-typescript2'
+// import json from 'rollup-plugin-json'
+import json from '@rollup/plugin-json'
 
 export default [
 	{
@@ -19,14 +20,14 @@ export default [
 				exports: 'named',
 			},
 			{
-				format: 'iife',
+				format: 'esm',
+				file: './lib/index.js',
+			},
+			{
+				format: 'umd',
 				name: 'bsStore',
 				file: './dist/bs-store.min.js',
 				exports: 'named',
-			},
-			{
-				format: 'esm',
-				file: './lib/index.js',
 			},
 		],
 		plugins: [
@@ -47,6 +48,9 @@ export default [
       (process.env.NODE_ENV === 'production' && uglify()), */
 			resolve(),
 			commonjs(),
+			json({
+				compact: true
+      }),
 			typescript(),
 			process.env.NODE_ENV === 'production' && terser(),
 		],
@@ -65,15 +69,18 @@ export default [
 				exports: 'named',
 			},
 			{
-				format: 'iife',
+				format: 'umd',
 				name: 'lzString',
 				file: './dist/bs-store-lz-string.min.js',
 				exports: 'named',
-			},
+			}
 		],
 		plugins: [
 			resolve(),
 			commonjs(),
+			json({
+				compact: true
+      }),
 			typescript(),
 			process.env.NODE_ENV === 'production' && terser(),
 		],

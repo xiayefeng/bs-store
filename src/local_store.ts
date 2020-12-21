@@ -1,6 +1,6 @@
+import {version} from '../package.json'
 
 type myType = string | number | boolean | object | bigint | Array<any> | null
-import {version} from '../package.json'
 interface strObject {
 	isString2Object: boolean
 	str: string
@@ -48,9 +48,9 @@ export default class BsStore {
 		}
 		let val: any = this.getItem(key)
 		if (val === null) {
-			if(process.env.NODE_ENV === 'development'){
+			// if(process.env.NODE_ENV === 'development'){
 				console.warn(`no exist such ${key} sessionStorage`)
-			}
+			// }
 			return null
 		}
 		return this.getValue(val)
@@ -74,9 +74,9 @@ export default class BsStore {
 		}
 		let val: any = this.getItem(key, storeType.local)
 		if (val === null) {
-			if(process.env.NODE_ENV === 'development'){
+			// if(process.env.NODE_ENV === 'development'){
 				console.warn(`no exist such ${key} 的localStorage`)
-			}
+			// }
 			return null
 		}
 		return this.getValue(val)
