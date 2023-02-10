@@ -1,1 +1,2 @@
-module.exports = require('./lib/main.js')
+
+export { getLocalSize, getSessionSize, default } from './lib/index.js'
